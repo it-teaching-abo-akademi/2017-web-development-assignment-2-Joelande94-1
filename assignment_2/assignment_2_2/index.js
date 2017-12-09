@@ -6,6 +6,7 @@ var marker;
         var pos = {lat: 60.45, lng: 22.2833};
     }
 */
+var result;
 function initMap(latitude, longitude){
     createMap(63.6667, 22.7);
 }
@@ -14,9 +15,10 @@ function moveMap(latitude, longitude){
     createMap(latitude, longitude);
 }
 
-function createMap(latitude, longitude){
+function createMap(latitude, longitude, markerPos){
     var pos = {lat: latitude, lng: longitude};
-    var map = new google.maps.Map(document.getElementById('map'), {
+    console.log("Pos: " + pos.lat + " , " + pos.lng);
+    map = new google.maps.Map(document.getElementById('map'), {
         center: pos,
         zoom: 8,
         mapTypeControl: true,
@@ -65,7 +67,7 @@ $(document).ready(function () {
     //take info and send it to zippopotamus
     //Then parse the response.
     $("#inputBox").on('click', '#button', function () {
-        console.log("Click!");
+        //console.log("Click!");
         var zip_code = $("#zipCodeField").val();
         var country = $("#countrySelector").val();
         history = JSON.parse(localStorage.history);
@@ -96,20 +98,35 @@ $(document).ready(function () {
                 $("#outputBoxTable").empty();
                 var json_response = client.responseText;
                 var response = JSON.parse(json_response);
+                result = response;
 
                 //No such ZIP code in this country
                 if(response.places !== null && response.places !== undefined){
-                    var lat = parseFloat(response.places[0].latitude);
-                    var lon = parseFloat(response.places[0].longitude);
-                    console.log("setCenter() to " + lat + "," + lon);
-                    createMap(lat, lon);
-                    //Create a row entry in the output "table"
-                    $("#outputBoxTable").append(`
-                    <div id="output_table_row">
-        				<p class="col-3">`+country+`</p>
-        				<p class="col-3">`+lat+`</p>
-        				<p class="col-3">`+lon+`</p>
-        			</div>`);
+                    var latitude = parseFloat(response.places[0].latitude);
+                    var longitude = parseFloat(response.places[0].longitude);
+                    createMap(latitude, longitude);
+                    $.each(response, function(k, v) {
+                        if(k === "places"){
+                            var positions = [];
+                            v.forEach(function(place){
+                                latitude = parseFloat(place.latitude);
+                                longitude = parseFloat(place.longitude);
+                                var position = {lat: latitude, lng: longitude};
+                                //Create a row entry in the output "table"
+                                $("#outputBoxTable").append(`
+                                <div id="output_table_row">
+                                    <p class="col-3">`+country+`</p>
+                                    <p class="col-3">`+latitude+`</p>
+                                    <p class="col-3">`+longitude+`</p>
+                                </div>`);
+                                var marker = new google.maps.Marker({
+                                    position: position,
+                                    map: map
+                                });
+                            });
+                        }
+                    });
+
                 }
 
         	};

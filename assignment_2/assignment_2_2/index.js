@@ -6,7 +6,6 @@ var marker;
         var pos = {lat: 60.45, lng: 22.2833};
     }
 */
-var result;
 function initMap(latitude, longitude){
     createMap(63.6667, 22.7);
 }
@@ -15,7 +14,7 @@ function moveMap(latitude, longitude){
     createMap(latitude, longitude);
 }
 
-function createMap(latitude, longitude, markerPos){
+function createMap(latitude, longitude){
     var pos = {lat: latitude, lng: longitude};
     console.log("Pos: " + pos.lat + " , " + pos.lng);
     map = new google.maps.Map(document.getElementById('map'), {

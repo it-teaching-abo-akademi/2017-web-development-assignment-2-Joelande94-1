@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!---->
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="index.css" rel="stylesheet" type="text/css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="index.js"></script>
+	<title>Föli</title>
+</head>
+<body id="root">
+    <div class="row">
+        <div id="busSelectorDiv">
+            <span>Select the bus line</span>
+            <select id="busSelector">
+            	<option>Pick a bus</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 buttonDiv">
+            <button type="button" id="showBusButton">Show buses</button>
+            <button type="button" id="refreshButton">Refresh</button>
+            <button type="button" id="showRouteButton">Show route</button>
+        </div>
+    </div>
+    <div class="row">
+    </div>
+    <div id="map">
+	</div>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3UIbKJCAsS19XpjT0tM_nBqIvycNRswo&callback=initMap">
+	</script>
+</body>
+</html>

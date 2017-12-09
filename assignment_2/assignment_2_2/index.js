@@ -88,7 +88,7 @@ $(document).ready(function () {
 
         //zippopotamus
         var client = new XMLHttpRequest();
-        var url = "http://api.zippopotam.us/"+getCountryCode(country)+"/"+zip_code;
+        var url = "https://api.zippopotam.us/"+getCountryCode(country)+"/"+zip_code;
         client.open("GET", url, true);
         client.onreadystatechange = function() {
             //Wait until it's done, yo.

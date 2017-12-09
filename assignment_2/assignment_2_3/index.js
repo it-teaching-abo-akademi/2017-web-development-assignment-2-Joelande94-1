@@ -71,7 +71,7 @@ function refresh(){
 }
 function getLiveBuses(live_buses){
     //Create xhttprequest with getLiveBuses2 as callback function
-    xhttpRequest(getLiveBuses2, "http://data.foli.fi/siri/vm");
+    xhttpRequest(getLiveBuses2, "https://data.foli.fi/siri/vm");
 }
 function getLiveBuses2(live_buses){
     var route_id = $("#busSelector").val();

@@ -130,12 +130,12 @@ function xhttpRequest(callback, file){
 //Use the route_id to get the shape_id from /trips.
 //The shape_id is used to get the coordinates from /shapes
 function displayShape(route_id){
-    var url = "https://data.foli.fi/gtfs/v0/20171130-162538/trips/route/" + route_id;
+    var url = "https://data.foli.fi/gtfs/v0/20180117-130104/trips/route/" + route_id;
     xhttpRequest(displayShape2, url);
 }
 function displayShape2(shapes){
     var shape_id = shapes[0].shape_id;
-    var url = "https://data.foli.fi/gtfs/v0/20171130-162538/shapes/" + shape_id;
+    var url = "https://data.foli.fi/gtfs/v0/20180117-130104/shapes/" + shape_id;
     xhttpRequest(drawShape, url);
 }
 function drawShape(path_coordinates){
@@ -210,7 +210,7 @@ $(document).ready(function () {
         alert("Yo browsa so old, she don't support local storage.");
     }
     (function getRoutes(routess){
-        xhttpRequest(addRoutes, "https://data.foli.fi/gtfs/v0/20171130-162538/routes");
+        xhttpRequest(addRoutes, "https://data.foli.fi/gtfs/v0/20180117-130104/routes");
     })();
 
     $("#refreshButton").click(function(){
